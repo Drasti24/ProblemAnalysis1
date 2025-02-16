@@ -27,20 +27,21 @@
         <span class="text-danger" asp-validation-for="GPA"></span>
     </div>
 
-<div class="form-group">
-    <label asp-for="ProgramOfStudyId"></label>
-    <select asp-for="ProgramOfStudyId" class="form-control">
-        <option value="">Select a program of study...</option>
-        @foreach (var program in ViewBag.ProgramOfStudies)
-        {
-                <option value="@program.ProgramOfStudyId" selected="@(program.ProgramOfStudyId == Model.ProgramOfStudyId)">
+    <div class="form-group">
+        <label asp-for="ProgramOfStudyId"></label>
+        <select asp-for="ProgramOfStudyId" class="form-control">
+            <option value="">Select a program of study...</option>
+            @foreach (var program in ViewBag.ProgramOfStudies)
+            {
+                <option value="@program.Id" selected="@(program.Id == Model.ProgramOfStudyId)">
+                    <!-- Change ProgramOfStudyId to Id -->
                     @program.Name
                 </option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="ProgramOfStudyId"></span>
+    </div>
 
-        }
-    </select>
-    <span class="text-danger" asp-validation-for="ProgramOfStudyId"></span>
-</div>
 
 
     <button type="submit" class="btn btn-success">Save Changes</button>

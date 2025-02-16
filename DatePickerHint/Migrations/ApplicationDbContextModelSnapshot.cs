@@ -24,27 +24,30 @@ namespace DatePickerHint.Migrations
 
             modelBuilder.Entity("DatePickerHint.Models.ProgramOfStudy", b =>
                 {
-                    b.Property<string>("ProgramOfStudyId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProgramOfStudyId");
+                    b.HasKey("Id");
 
                     b.ToTable("ProgramOfStudies");
 
                     b.HasData(
                         new
                         {
-                            ProgramOfStudyId = "CPA",
-                            Name = "Computer Programmer Analyst"
+                            Id = 1,
+                            Name = "Computer Programmer (CP)"
                         },
                         new
                         {
-                            ProgramOfStudyId = "BACS",
-                            Name = "Bachelor of Applied Computer Science"
+                            Id = 2,
+                            Name = "Bachelor of Applied Computer Science (BACS)"
                         });
                 });
 
@@ -70,15 +73,34 @@ namespace DatePickerHint.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProgramOfStudyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProgramOfStudyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProgramOfStudyId");
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(1971, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Bart",
+                            GPA = 2.7000000000000002,
+                            LastName = "Simpson",
+                            ProgramOfStudyId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(1973, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Lisa",
+                            GPA = 4.0,
+                            LastName = "Simpson",
+                            ProgramOfStudyId = 2
+                        });
                 });
 
             modelBuilder.Entity("DatePickerHint.Models.Student", b =>

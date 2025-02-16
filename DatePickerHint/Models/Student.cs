@@ -9,41 +9,35 @@ namespace DatePickerHint.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter a first name.")]
+        [Required]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Please enter a last name.")]
+        [Required]
         public string LastName { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Please enter a date of birth.")]
-        [DataType(DataType.Date)]
+        [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid GPA.")]
-        [Range(0, 4.0, ErrorMessage = "GPA must be between 0.0 and 4.0.")]
+        [Required]
+        [Range(0.0, 4.0, ErrorMessage = "GPA must be between 0.0 and 4.0.")]
         public double GPA { get; set; }
 
-        [Required(ErrorMessage = "Please select a program of study.")]
-        public string ProgramOfStudyId { get; set; } = string.Empty;
+        [Required]
+        public int ProgramOfStudyId { get; set; } // Foreign key property
+        public ProgramOfStudy? ProgramOfStudy { get; set; } // Navigation property
 
-        [ForeignKey("ProgramOfStudyId")]
-        public ProgramOfStudy? ProgramOfStudy { get; set; }
+        // Computed Property: Age
+        public int Age => DateTime.Now.Year - DateOfBirth.Year;
 
-        // Computed properties
-        [NotMapped]
-        public int Age => DateTime.Now.Year - DateOfBirth.Year; // Simplistic, may not account for month/day
-
-        [NotMapped]
-        public string GPAScale
+        // Computed Property: GPA Scale
+        public string GPAScale => GPA switch
         {
-            get
-            {
-                if (GPA >= 3.7) return "Excellent";
-                if (GPA >= 3.3) return "Very Good";
-                if (GPA >= 2.7) return "Good";
-                if (GPA >= 2.0) return "Satisfactory";
-                return "Unsatisfactory";
-            }
-        }
+            >= 3.7 => "Excellent",
+            >= 3.0 => "Very Good",
+            >= 2.0 => "Good",
+            >= 1.0 => "Satisfactory",
+            _ => "Unsatisfactory"
+        };
     }
+
 }

@@ -33,11 +33,12 @@
             <option value="">Select a program of study...</option>
             @foreach (var program in ViewBag.ProgramOfStudies)
             {
-                <option value="@program.ProgramOfStudyId">@program.Name</option>
+                <option value="@program.Id">@program.Name</option> <!-- Change ProgramOfStudyId to Id -->
             }
         </select>
         <span class="text-danger" asp-validation-for="ProgramOfStudyId"></span>
     </div>
+
 
     <button type="submit" class="btn btn-success">Add Student</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>

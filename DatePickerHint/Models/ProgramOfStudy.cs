@@ -5,9 +5,10 @@ namespace DatePickerHint.Models
     public class ProgramOfStudy
     {
         [Key]
-        public string ProgramOfStudyId { get; set; } = string.Empty; // e.g., "CPA"
+        public int Id { get; set; } // Correct primary key name
 
         [Required]
-        public string Name { get; set; } = string.Empty; // e.g., "Computer Programmer Analyst"
+        public string Name { get; set; } = string.Empty;
     }
+
 }
