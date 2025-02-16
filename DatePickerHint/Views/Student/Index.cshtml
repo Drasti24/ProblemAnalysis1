@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<DatePickerHint.Models.Student>
 
-<h2>STUDENTS</h2>
-<a asp-action="Create" class="btn btn-primary">Add New Student</a>
+<h2>All Students</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Student</a> <!-- Add Student button -->
+</p>
 
 <table class="table">
     <thead>
@@ -11,6 +14,7 @@
             <th>Age</th>
             <th>GPA</th>
             <th>GPA Scale</th>
+            <th>Program</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,6 +27,7 @@
                 <td>@student.Age</td>
                 <td>@student.GPA</td>
                 <td>@student.GPAScale</td>
+                <td>@student.ProgramOfStudy?.Name</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@student.Id">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@student.Id">Delete</a>

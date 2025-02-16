@@ -4,6 +4,7 @@ using DatePickerHint.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatePickerHint.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250216060250_FixForeignKeyConstraint")]
+    partial class FixForeignKeyConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,18 +37,6 @@ namespace DatePickerHint.Migrations
                     b.HasKey("ProgramOfStudyId");
 
                     b.ToTable("ProgramOfStudies");
-
-                    b.HasData(
-                        new
-                        {
-                            ProgramOfStudyId = "CPA",
-                            Name = "Computer Programmer Analyst"
-                        },
-                        new
-                        {
-                            ProgramOfStudyId = "BACS",
-                            Name = "Bachelor of Applied Computer Science"
-                        });
                 });
 
             modelBuilder.Entity("DatePickerHint.Models.Student", b =>

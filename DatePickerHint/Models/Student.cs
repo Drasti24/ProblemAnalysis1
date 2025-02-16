@@ -9,24 +9,29 @@ namespace DatePickerHint.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a first name.")]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a last name.")]
         public string LastName { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a date of birth.")]
         [DataType(DataType.Date)]
-        [Display(Name = "Date of Birth")]
-        [CustomValidation(typeof(Student), nameof(ValidateDateOfBirth))]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid GPA.")]
         [Range(0, 4.0, ErrorMessage = "GPA must be between 0.0 and 4.0.")]
         public double GPA { get; set; }
 
+        [Required(ErrorMessage = "Please select a program of study.")]
+        public string ProgramOfStudyId { get; set; } = string.Empty;
+
+        [ForeignKey("ProgramOfStudyId")]
+        public ProgramOfStudy? ProgramOfStudy { get; set; }
+
+        // Computed properties
         [NotMapped]
-        public int Age => DateTime.Now.Year - DateOfBirth.Year;
+        public int Age => DateTime.Now.Year - DateOfBirth.Year; // Simplistic, may not account for month/day
 
         [NotMapped]
         public string GPAScale
@@ -39,15 +44,6 @@ namespace DatePickerHint.Models
                 if (GPA >= 2.0) return "Satisfactory";
                 return "Unsatisfactory";
             }
-        }
-
-        public static ValidationResult ValidateDateOfBirth(DateTime dob, ValidationContext context)
-        {
-            if (dob > DateTime.Today)
-            {
-                return new ValidationResult("Date of Birth cannot be in the future.");
-            }
-            return ValidationResult.Success!;
         }
     }
 }
