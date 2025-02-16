@@ -1,9 +1,15 @@
-﻿@model DatePickerHint.Models.Student
+﻿@* //DRASTI PATEL (#8839416)
+//PROBLEM ANALYSIS #1
+//FEBRUARY 16, 2025 *@
+
+@model DatePickerHint.Models.Student
 
 <h2>Are you sure you want to delete this student?</h2>
 
+<!--displays dtudent's full name as confirmation.-->
 <p><strong>@Model.FirstName @Model.LastName</strong></p>
 
+<!--sends POST request to delete student.-->
 <form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Delete</button>

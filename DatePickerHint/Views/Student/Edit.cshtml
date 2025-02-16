@@ -1,7 +1,12 @@
-﻿@model DatePickerHint.Models.Student
+﻿@* //DRASTI PATEL (#8839416)
+//PROBLEM ANALYSIS #1
+//FEBRUARY 16, 2025 *@
+
+@model DatePickerHint.Models.Student
 
 <h2>Edit Student</h2>
 
+<!-- Form that submits to the 'Edit' action with the student's ID -->
 <form asp-action="Edit" asp-route-id="@Model.Id">
     <div class="form-group">
         <label asp-for="FirstName"></label>
@@ -43,7 +48,7 @@
     </div>
 
 
-
+    <!---buttons -->
     <button type="submit" class="btn btn-success">Save Changes</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

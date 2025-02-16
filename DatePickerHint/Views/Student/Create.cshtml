@@ -1,7 +1,12 @@
-﻿@model DatePickerHint.Models.Student
+﻿@* //DRASTI PATEL (#8839416)
+//PROBLEM ANALYSIS #1
+//FEBRUARY 16, 2025 *@
+
+@model DatePickerHint.Models.Student
 
 <h2>Add New Student</h2>
 
+<!-- this form submits to the 'Create' action to add a new student to the database -->
 <form asp-action="Create">
     <div class="form-group">
         <label asp-for="FirstName"></label>
@@ -29,17 +34,19 @@
 
     <div class="form-group">
         <label asp-for="ProgramOfStudyId"></label>
+        <!-- this selects dropdown lists available programs of study.-->
         <select asp-for="ProgramOfStudyId" class="form-control">
             <option value="">Select a program of study...</option>
             @foreach (var program in ViewBag.ProgramOfStudies)
             {
+                <!-- for each program, create an option to select. -->
                 <option value="@program.Id">@program.Name</option> <!-- Change ProgramOfStudyId to Id -->
             }
         </select>
         <span class="text-danger" asp-validation-for="ProgramOfStudyId"></span>
     </div>
 
-
+    <!--buttons-->
     <button type="submit" class="btn btn-success">Add Student</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

@@ -1,4 +1,8 @@
-﻿using System;
+﻿//DRASTI PATEL (#8839416)
+//PROBLEM ANALYSIS #1
+//FEBRUARY 16, 2025
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,30 +10,31 @@ namespace DatePickerHint.Models
 {
     public class Student
     {
-        [Key]
+        [Key]            //marks this property as primary key for the table.
         public int Id { get; set; }
 
-        [Required]
+        [Required]      //ensures first name is provided
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+        [Required]      //ensures last name is provided
         public string LastName { get; set; } = string.Empty;
 
-        [Required]
+        [Required]      //ensures DOB is provided
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
+        [Required]      //ensures GPA is provided and within valid range.
         [Range(0.0, 4.0, ErrorMessage = "GPA must be between 0.0 and 4.0.")]
         public double GPA { get; set; }
 
-        [Required]
-        public int ProgramOfStudyId { get; set; } // Foreign key property
-        public ProgramOfStudy? ProgramOfStudy { get; set; } // Navigation property
+        [Required]      //marks ProgramOfStudyId as required and represents foreign key
+        public int ProgramOfStudyId { get; set; }
+        //navigation property for related ProgramOfStudy
+        public ProgramOfStudy? ProgramOfStudy { get; set; } 
 
-        // Computed Property: Age
+        //computed property for calculating student's age based on their DOB.
         public int Age => DateTime.Now.Year - DateOfBirth.Year;
 
-        // Computed Property: GPA Scale
+        //computed property for categorinzing GPA on scale.
         public string GPAScale => GPA switch
         {
             >= 3.7 => "Excellent",
